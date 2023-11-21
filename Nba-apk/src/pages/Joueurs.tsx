@@ -12,7 +12,7 @@ const Home: React.FC = () => {
       try {
         // Assurez-vous que equipeId a une valeur avant de faire la requête
         if (equipeId !== null) {
-          const reponse = await fetch(`http://192.168.211.227:8080/equipes/joueurs/${equipeId}`);
+          const reponse = await fetch(`http://192.168.113.227:8080/equipes/joueurs/${equipeId}`);
           const donnees = await reponse.json();
           setJoueurs(donnees);
         }
@@ -69,10 +69,10 @@ const Home: React.FC = () => {
               </IonRow>
 
               {joueurs.map((joueur) => (
-    <IonRow key={joueur.idJoueur} className='table-row'>
-      <IonCol>{joueur.idJoueur}</IonCol>
-      <IonCol>{joueur.nomJoueur}</IonCol>
-      <IonCol>{joueur.equipe.abbreviation}</IonCol>
+    <IonRow key={joueur['idJoueur']} className='table-row'>
+      <IonCol>{joueur['idJoueur']}</IonCol>
+      <IonCol>{joueur['nomJoueur']}</IonCol>
+      <IonCol>{joueur['equipe']['abbreviation']}</IonCol>
       {/* <IonCol>{joueur.matchJoue}</IonCol>
       <IonCol>{joueur.matchJoue}</IonCol>
       <IonCol>{joueur.pointParMatch}</IonCol>

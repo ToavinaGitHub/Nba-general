@@ -9,7 +9,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const reponse = await fetch('http://192.168.211.227:8080/equipes');
+        const reponse = await fetch('http://192.168.113.227:8080/equipes');
         const donnees = await reponse.json();
         setEquipes(donnees);
       } catch (erreur) {
@@ -40,11 +40,11 @@ const Home: React.FC = () => {
       <IonCardContent>
       <IonList>
               {equipes.map((equipe) => (
-                <IonItem key={equipe.idEquipe}>
+                <IonItem key={equipe['idEquipe']}>
                   <IonThumbnail slot="start">
                     {/* Vous pouvez afficher une image ici si vos données incluent des URL d'images */}
                   </IonThumbnail>
-                  <IonRouterLink href={`Joueurs?id=${equipe.idEquipe}`}>{equipe.nomEquipe}</IonRouterLink>
+                  <IonRouterLink href={`Joueurs?id=${equipe['idEquipe']}`}>{equipe['nomEquipe']}</IonRouterLink>
                 </IonItem>
               ))}
             </IonList>
