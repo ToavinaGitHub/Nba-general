@@ -1,0 +1,17 @@
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.horizontal-scroll {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.table-header,
+.table-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    /* Ensure the row takes up 100% width */
+}
