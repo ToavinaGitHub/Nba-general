@@ -25,6 +25,7 @@ public class JoueurController {
     EquipeRepository eq;
 
     @GetMapping("/joueurs")
+
     @CrossOrigin(origins = "*",allowedHeaders = "*")
     public Iterable<Joueur> getAll(){
         return jr.findAll();
@@ -32,6 +33,7 @@ public class JoueurController {
 
 
     @GetMapping("/statistiques/{idJoueur}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public Statistique getStat(@PathVariable int idJoueur){
 
         Joueur j = jr.findByIdJoueur(idJoueur);
@@ -56,6 +58,7 @@ public class JoueurController {
     }
 
     @GetMapping("/statistiques")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public Iterable<Statistique> getStats(){
 
         ArrayList<Joueur> allJ = (ArrayList<Joueur>)  jr.findAll();

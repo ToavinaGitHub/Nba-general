@@ -27,12 +27,14 @@ public class ActionMatchJoueurController {
 
 
     @GetMapping("/actionMatchJoueurs/{match}/{joueur}/{action}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public Iterable<ActionMatchJoueur> getAllActionByJoueurMatch(@PathVariable int match,@PathVariable int joueur,@PathVariable int action){
         List<ActionMatchJoueur> all = ac.findByMatchAndJoueurAndAction(mc.findByIdMatch(match),jc.findByIdJoueur(joueur),ar.findByIdAction(action));
         return all;
     }
 
     @PostMapping("/rebonds/create")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public String insertRebondJoueurMatch(@RequestParam int idJoueur,@RequestParam int idMatch,@RequestParam double temps){
 
         Action action = ar.findByIdAction(3);
@@ -46,6 +48,7 @@ public class ActionMatchJoueurController {
         }
     }
     @PostMapping("/passes/create")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public String insertPasseJoueurMatch(@RequestParam int idJoueur,@RequestParam int idMatch,@RequestParam double temps){
 
         Action action = ar.findByIdAction(1);
@@ -59,6 +62,7 @@ public class ActionMatchJoueurController {
         }
     }
     @PostMapping("/passeDecisives/create")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public String insertPasseDecisiveJoueurMatch(@RequestParam int idJoueur,@RequestParam int idMatch,@RequestParam double temps){
 
         Action action = ar.findByIdAction(1);
@@ -73,6 +77,7 @@ public class ActionMatchJoueurController {
     }
 
     @PostMapping("/tirs/create/{point}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public String insertTirJoueurMatch(@PathVariable int point, @RequestParam int idJoueur, @RequestParam int idMatch, @RequestParam double temps) {
         try {
             // Récupérer l'action correspondant au tir depuis la base de données
@@ -92,6 +97,7 @@ public class ActionMatchJoueurController {
 
 
     @PostMapping("/defenses/create")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public String insertDefenseJoueurMatch(@RequestParam int idJoueur,@RequestParam int idMatch,@RequestParam double temps){
 
         Action action = ar.findByIdAction(4);
@@ -106,6 +112,7 @@ public class ActionMatchJoueurController {
     }
 
     @PostMapping("/lfs/create")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public String insertLf(@RequestParam int idJoueur,@RequestParam int idMatch,@RequestParam double temps){
 
         Action action = ar.findByIdAction(5);

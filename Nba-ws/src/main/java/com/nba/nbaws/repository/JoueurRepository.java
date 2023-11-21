@@ -38,4 +38,8 @@ public interface JoueurRepository extends CrudRepository<Joueur,Integer> {
     @Query("SELECT (CAST(count(m) AS double) / CASE WHEN :tirMaty = 0 THEN 1 ELSE :tirMaty END) * 100 FROM ActionMatchJoueur m WHERE m.action.idAction = 5 AND m.etat > 0 AND m.joueur.idJoueur = :idJoueur")
     public double lf(@Param("idJoueur") int idJoueur, @Param("tirMaty") int tirMaty);
 
+
+
+    @Query("SELECT j FROM Joueur j WHERE j.equipe.idEquipe= :idEquipe")
+    public List<Joueur> joueurEquipe(@Param("idEquipe")int idEquipe);
 }

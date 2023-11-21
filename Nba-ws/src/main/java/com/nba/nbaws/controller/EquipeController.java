@@ -6,10 +6,7 @@ import com.nba.nbaws.Entity.Match;
 import com.nba.nbaws.repository.EquipeRepository;
 import com.nba.nbaws.repository.JoueurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,11 +19,13 @@ public class EquipeController {
     JoueurRepository joueurRepository;
 
     @GetMapping("/equipes")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public Iterable<Equipe> getAll(){
         return equipe.findAll();
     }
 
     @GetMapping("/equipes/joueurs/{e}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public Iterable<Joueur> joueursParEquipe(@PathVariable int e){
 
         Equipe eq = equipe.findByIdEquipe(e);
@@ -35,7 +34,9 @@ public class EquipeController {
         return all;
     }
 
+
     @GetMapping("/equipes/matchs/{idEquipe}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public Iterable<Match> matchJouer(@PathVariable int idEquipe){
         List<Match> all = equipe.matchJoue(equipe.findByIdEquipe(idEquipe));
         return all;
