@@ -1,6 +1,7 @@
 package com.nba.nbaws.controller;
 
 
+import com.nba.nbaws.Entity.ActionMatchJoueur;
 import com.nba.nbaws.Entity.Joueur;
 import com.nba.nbaws.Entity.Statistique;
 import com.nba.nbaws.repository.EquipeRepository;
@@ -32,7 +33,7 @@ public class JoueurController {
     }
 
 
-    @GetMapping("/statistiques/{idJoueur}")
+    @GetMapping("/statistiques/joueurs/{idJoueur}")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     public Statistique getStat(@PathVariable int idJoueur){
 
@@ -41,19 +42,34 @@ public class JoueurController {
         int countMatch = jr.matchJoue(j);
         int tirMaty = jr.totalTirMaty(idJoueur);
 
+        Vector<ActionMatchJoueur> allTir = jr.getAllTir(j.getIdJoueur());
+
         System.out.println(tirMaty);
 
         Statistique st = new Statistique();
-        st.setPointParMatch(jr.pointMoyenneParMatch(idJoueur,countMatch));
+        try{st.setPointParMatch(jr.pointMoyenneParMatch(j.getIdJoueur(),countMatch));}catch (Exception e){st.setPointParMatch(0);}
+
+
         st.setJoueur(j);
-        st.setMatchJoue(countMatch);
+        try{st.setMatchJoue(countMatch);}catch (Exception e){st.setMatchJoue(0);};
 
-        st.setLf(jr.lf(idJoueur,tirMaty));
+        System.out.println(4+"----------------");
+        try{st.setLf(jr.lf(j.getIdJoueur(),tirMaty));} catch(Exception e){st.setLf(0);};
 
-        st.setThree(jr.three(idJoueur,tirMaty));
-        st.setRebondParMatch(jr.rebondMoyenneParMatch(idJoueur,countMatch));
-        st.setPasseDecisiveParMatch(jr.passeDecisive(idJoueur,countMatch));
-        st.setDesactive(tirMaty*2);
+        try{st.setThree(jr.three(j.getIdJoueur(),tirMaty));}catch (Exception e){st.setThree(0);}
+        try{st.setRebondParMatch(jr.rebondMoyenneParMatch(j.getIdJoueur(),countMatch));}catch (Exception e){st.setRebondParMatch(0);}
+        try{st.setPasseDecisiveParMatch(jr.passeDecisive(j.getIdJoueur(),countMatch));}catch (Exception e){st.setPasseDecisiveParMatch(0);}
+        try{st.setDesactive(tirMaty*2);}catch (Exception e){st.setDesactive(0);}
+
+        System.out.println("tir maty:"+tirMaty);
+        System.out.println("all :"+allTir.size());
+
+        double fg = (double) tirMaty/allTir.size();
+
+        try{st.setFg(fg*100);if(Double.isNaN(st.getFg())){st.setFg(0);}}catch (Exception e){st.setFg(0);}
+
+        try{st.setMinuteParMatch(jr.getMinuteMatch(j.getIdJoueur(),countMatch));}catch (Exception e){st.setMinuteParMatch(0);}
+
         return st;
     }
 
@@ -65,26 +81,84 @@ public class JoueurController {
 
         Vector<Statistique> all = new Vector<Statistique>();
 
+        System.out.println(1+"----------------");
         for (Joueur j : allJ
              ) {
 
+            System.out.println(2+"----------------");
             int countMatch = jr.matchJoue(j);
             int tirMaty = jr.totalTirMaty(j.getIdJoueur());
 
+            Vector<ActionMatchJoueur> allTir = jr.getAllTir(j.getIdJoueur());
             System.out.println(tirMaty);
 
+            System.out.println(3+"----------------");
             Statistique st = new Statistique();
-            st.setPointParMatch(jr.pointMoyenneParMatch(j.getIdJoueur(),countMatch));
+            try{st.setPointParMatch(jr.pointMoyenneParMatch(j.getIdJoueur(),countMatch));}catch (Exception e){st.setPointParMatch(0);}
+
             st.setJoueur(j);
-            st.setMatchJoue(countMatch);
+            try{st.setMatchJoue(countMatch);}catch (Exception e){st.setMatchJoue(0);};
 
-            st.setLf(jr.lf(j.getIdJoueur(),tirMaty));
+            System.out.println(4+"----------------");
+            try{st.setLf(jr.lf(j.getIdJoueur(),tirMaty));} catch(Exception e){st.setLf(0);};
 
-            st.setThree(jr.three(j.getIdJoueur(),tirMaty));
-            st.setRebondParMatch(jr.rebondMoyenneParMatch(j.getIdJoueur(),countMatch));
-            st.setPasseDecisiveParMatch(jr.passeDecisive(j.getIdJoueur(),countMatch));
-            st.setDesactive(tirMaty*2);
+            try{st.setThree(jr.three(j.getIdJoueur(),tirMaty));}catch (Exception e){st.setThree(0);}
+            try{st.setRebondParMatch(jr.rebondMoyenneParMatch(j.getIdJoueur(),countMatch));}catch (Exception e){st.setRebondParMatch(0);}
+            try{st.setPasseDecisiveParMatch(jr.passeDecisive(j.getIdJoueur(),countMatch));}catch (Exception e){st.setPasseDecisiveParMatch(0);}
+            try{st.setDesactive(tirMaty*2);}catch (Exception e){st.setDesactive(0);}
 
+            try{st.setMinuteParMatch(jr.getMinuteMatch(j.getIdJoueur(),countMatch));}catch (Exception e){st.setMinuteParMatch(0);}
+
+            double fg = (double) tirMaty/allTir.size();
+
+            try{st.setFg(fg*100);if(Double.isNaN(st.getFg())){st.setFg(0);}}catch (Exception e){st.setFg(0);}
+
+            System.out.println(5+"----------------");
+            all.add(st);
+        }
+
+        return all;
+    }
+
+    @GetMapping("/statistiques/equipes/{idEquipe}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    public Vector<Statistique> getStatParEquipe(@PathVariable int idEquipe){
+
+        ArrayList<Joueur> allJ = (ArrayList<Joueur>)  jr.findJoueurByEquipe(eq.findByIdEquipe(idEquipe));
+        Vector<Statistique> all = new Vector<Statistique>();
+
+        System.out.println(1+"----------------");
+        for (Joueur j : allJ
+        ) {
+
+            System.out.println(2+"----------------");
+            int countMatch = jr.matchJoue(j);
+            int tirMaty = jr.totalTirMaty(j.getIdJoueur());
+            Vector<ActionMatchJoueur> allTir = jr.getAllTir(j.getIdJoueur());
+            System.out.println(tirMaty);
+
+            System.out.println(3+"----------------");
+            Statistique st = new Statistique();
+            try{st.setPointParMatch(jr.pointMoyenneParMatch(j.getIdJoueur(),countMatch));}catch (Exception e){st.setPointParMatch(0);}
+
+            st.setJoueur(j);
+            try{st.setMatchJoue(countMatch);}catch (Exception e){st.setMatchJoue(0);};
+
+            System.out.println(4+"----------------");
+            try{st.setLf(jr.lf(j.getIdJoueur(),tirMaty));} catch(Exception e){st.setLf(0);};
+
+            try{st.setThree(jr.three(j.getIdJoueur(),tirMaty));}catch (Exception e){st.setThree(0);}
+            try{st.setRebondParMatch(jr.rebondMoyenneParMatch(j.getIdJoueur(),countMatch));}catch (Exception e){st.setRebondParMatch(0);}
+            try{st.setPasseDecisiveParMatch(jr.passeDecisive(j.getIdJoueur(),countMatch));}catch (Exception e){st.setPasseDecisiveParMatch(0);}
+            try{st.setDesactive(tirMaty*2);}catch (Exception e){st.setDesactive(0);}
+
+
+            try{st.setMinuteParMatch(jr.getMinuteMatch(j.getIdJoueur(),countMatch));}catch (Exception e){st.setMinuteParMatch(0);}
+
+
+            double fg = (double) tirMaty/allTir.size();
+            try{st.setFg(fg*100);if(Double.isNaN(st.getFg())){st.setFg(0);}}catch (Exception e){st.setFg(0);}
+            System.out.println(5+"----------------");
             all.add(st);
         }
 
