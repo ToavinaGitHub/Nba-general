@@ -1,21 +1,27 @@
 import React from 'react';
+import logo from './assets/image/logo.jpg';
 
 const Header = () => {
+  const headerStyle = {
+    backgroundColor: 'black',
+    display: 'flex',
+    alignItems: 'center',  
+    justifyContent: 'center', 
+    height: '100px',
+  };
+
+  const textStyle = {
+    textAlign: 'center',
+  }
+
   return (
-    <nav className="navbar navbar-default">
-      <div className="container">
-        <div className="navbar-header">
-          <a className="navbar-brand" href="#">Mon Site</a>
-        </div>
-        <div className="collapse navbar-collapse">
-          <ul className="nav navbar-nav navbar-right">
-            <li><a href="#">Accueil</a></li>
-            <li><a href="#">À Propos</a></li>
-            <li><a href="#">Contact</a></li>
-          </ul>
-        </div>
+    <><div style={headerStyle}>
+       <img src={logo} alt="Logo NBA" style={{ maxWidth: '80%', maxHeight: '80%' }} />
       </div>
-    </nav>
+      <div>
+        <h3 style={textStyle}>Statistiques individuelles</h3>
+        <hr></hr>
+      </div></>
   );
 };
 
