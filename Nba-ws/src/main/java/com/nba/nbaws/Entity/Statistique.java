@@ -7,6 +7,7 @@ public class Statistique {
 
     Joueur joueur;
 
+    int matchEquipe;
     double matchJoue;
     double pointParMatch;
     double rebondParMatch;
@@ -121,5 +122,17 @@ public class Statistique {
         this.three = three;
         this.lf = lf;
         this.desactive = desactive;
+    }
+
+    public int getMatchEquipe() {
+        return matchEquipe;
+    }
+
+    public void setMatchEquipe(int matchEquipe) {
+        this.matchEquipe = matchEquipe;
+    }
+
+    public void setMatchJoue(double matchJoue) {
+        this.matchJoue = matchJoue;
     }
 }

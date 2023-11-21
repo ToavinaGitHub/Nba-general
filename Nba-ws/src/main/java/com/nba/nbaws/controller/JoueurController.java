@@ -3,6 +3,7 @@ package com.nba.nbaws.controller;
 
 import com.nba.nbaws.Entity.ActionMatchJoueur;
 import com.nba.nbaws.Entity.Joueur;
+import com.nba.nbaws.Entity.Match;
 import com.nba.nbaws.Entity.Statistique;
 import com.nba.nbaws.repository.EquipeRepository;
 import com.nba.nbaws.repository.JoueurRepository;
@@ -42,6 +43,8 @@ public class JoueurController {
         int countMatch = jr.matchJoue(j);
         int tirMaty = jr.totalTirMaty(idJoueur);
 
+        List<Match> matchs = eq.matchJoue(j.getEquipe());
+
         Vector<ActionMatchJoueur> allTir = jr.getAllTir(j.getIdJoueur());
 
         System.out.println(tirMaty);
@@ -49,6 +52,7 @@ public class JoueurController {
         Statistique st = new Statistique();
         try{st.setPointParMatch(jr.pointMoyenneParMatch(j.getIdJoueur(),countMatch));}catch (Exception e){st.setPointParMatch(0);}
 
+        st.setMatchEquipe(matchs.size());
 
         st.setJoueur(j);
         try{st.setMatchJoue(countMatch);}catch (Exception e){st.setMatchJoue(0);};
@@ -96,6 +100,8 @@ public class JoueurController {
             Statistique st = new Statistique();
             try{st.setPointParMatch(jr.pointMoyenneParMatch(j.getIdJoueur(),countMatch));}catch (Exception e){st.setPointParMatch(0);}
 
+            List<Match> matchs = eq.matchJoue(j.getEquipe());
+            st.setMatchEquipe(matchs.size());
             st.setJoueur(j);
             try{st.setMatchJoue(countMatch);}catch (Exception e){st.setMatchJoue(0);};
 
@@ -141,6 +147,8 @@ public class JoueurController {
             Statistique st = new Statistique();
             try{st.setPointParMatch(jr.pointMoyenneParMatch(j.getIdJoueur(),countMatch));}catch (Exception e){st.setPointParMatch(0);}
 
+            List<Match> matchs = eq.matchJoue(j.getEquipe());
+            st.setMatchEquipe(matchs.size());
             st.setJoueur(j);
             try{st.setMatchJoue(countMatch);}catch (Exception e){st.setMatchJoue(0);};
 
@@ -164,10 +172,4 @@ public class JoueurController {
 
         return all;
     }
-
-
-
-
-
-
 }

@@ -1,0 +1,53 @@
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.horizontal-scroll {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.table-header,
+.table-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    /* Ensure the row takes up 100% width */
+}
+
+/* Joueurs.css */
+
+.table-container {
+    overflow-x: auto;
+    margin: 20px;
+  }
+  
+  .horizontal-scroll {
+    overflow-x: auto;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+  

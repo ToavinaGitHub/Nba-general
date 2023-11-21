@@ -1,0 +1,44 @@
+
+.header {
+  background-color: #2c3e50; /* Dark background color for the header */
+  color: #ecf0f1; /* Light text color */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.nba-logo {
+  width: 17px; /* Adjust the width as needed */
+  height: 40px; /* Adjust the height as needed */
+  margin-right: 16px; /* Add some spacing between the logo and title */
+}
+
+.card {
+  border-radius: 10px; /* Rounded corners for the card */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle lift */
+}
+
+.card-title {
+  font-size: 1.5rem; /* Larger font size for the card title */
+  color: #2c3e50; /* Dark text color */
+}
+
+.card-subtitle {
+  font-size: 1rem; /* Smaller font size for the subtitle */
+  color: #7f8c8d; /* Light text color for subtitle */
+}
+
+.list-item {
+  border-bottom: 1px solid #bdc3c7; /* Border between list items */
+}
+
+.list-link {
+  color: #3498db; /* Link color */
+}
+
+.list-link:hover {
+  text-decoration: underline; /* Underline on hover for links */
+}
+
+/* Add any additional styling as needed */

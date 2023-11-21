@@ -1,0 +1,7 @@
+{
+  "name": "nba",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
